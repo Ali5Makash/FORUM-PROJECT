@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форум</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <!-- Обновлённый путь к CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Добро пожаловать на форум</h1>
+    </header>
+    <div class="post-form">
+      <form action="/submit" method="POST">
+        <textarea
+          name="content"
+          placeholder="Напишите ваше сообщение..."
+          required
+        ></textarea>
+        <button type="submit">Отправить</button>
+      </form>
+    </div>
+
+    <div class="posts">
+      <h2>Сообщения</h2>
+      <ul>
+        <% posts.forEach(post => { %>
+        <li class="post">
+          <p><%= post.content %></p>
+          <div class="post-actions">
+            <form
+              action="/delete/<%= post.id %>"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit">Удалить</button>
+            </form>
+            <form
+              action="/edit/<%= post.id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button type="submit">Редактировать</button>
+            </form>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <script src="/js/scripts.js"></script>
+  </body>
+</html>
